@@ -44,3 +44,9 @@ Since the deadline is **next Wednesday** and our concept is still being finalize
 - **Mohammad Daaboul**
 - **Paul Estephan**
 - **Samy**
+
+---
+
+## Extras
+
+Create a Poster, Presentation, and a Report
