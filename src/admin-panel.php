@@ -1,3 +1,23 @@
+<?php
+session_start();
+if ($_SESSION['user_role'] !== 'admin') {
+    echo "Access denied. You do not have permission to access this page.";
+    exit();
+}
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Check if user is an admin
+if ($_SESSION['user_role'] !== 'admin') {
+    header("Location: index.php"); // Redirect non-admins to homepage
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +36,7 @@
         <li><a href="#manage-events">Manage Events</a></li>
         <li><a href="#manage-emails">Manage Emails</a></li>
         <li><a href="#analytics">View Analytics</a></li>
-        <li><a href="#logout">Logout</a></li>
+        <li><a href="php/logout.php">Logout</a></li>
       </ul>
     </aside>
 

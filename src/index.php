@@ -1,3 +1,14 @@
+<?php
+// Start session
+session_start();
+
+// If the user is not logged in, redirect to the login page
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +30,7 @@
         <li><a href="#events">Events</a></li>
         <li><a href="#feedback">Feedback</a></li>
         <li><a href="#contact">Contact</a></li>
+		<li><a href="php/logout.php">Logout</a></li>
       </ul>
     </nav>
   </header>
