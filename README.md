@@ -35,6 +35,11 @@ The project will be divided into four major sections:
 4. **Mail Servers and Database:** Managing notifications, logs, and data storage.
 
 ---
+## How to Currently Run This Project
+
+copy paste the path of the index.html into the browser
+
+---
 
 ## Responsibilities
 
