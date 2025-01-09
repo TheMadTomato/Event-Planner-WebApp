@@ -53,9 +53,10 @@ The project will be divided into four major sections:
 - Distinction between Admin and End-User session 
 - DB tables Initialized 
 
-## To Be Added 
+## To Work On
 
 - Adjust Front-End style especially in Admin-Panel 
+- Replace Mail inout to username input for login
 - Implement a Calendar showing Events in the End-User Homepage 
 - Implements Weather API with the Calendar 
 - Implement Authenticaor / 2FA 

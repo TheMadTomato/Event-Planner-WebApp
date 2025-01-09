@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS users (
 -- Insert an admin user
 INSERT INTO users (name, email, password, role) 
 VALUES (
-    'Admin User', 
-    'admin@example.com', 
-    '$2y$10$eH/1Y8M.f8bDsmGxZsFJs.3jlk2WGG3Vl7hI4jEzqJ1O/qLi7G16K', 
+    'Admin', 
+    'admin@test', 
+    '$2y$10$w0H6vsB4VItghirdH2Cxfu3atq6JHlhMa2x60xUooKsaD0Y.ueJcW', 
     'admin'
 );
 
@@ -56,3 +56,4 @@ CREATE TABLE IF NOT EXISTS notifications (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+	
