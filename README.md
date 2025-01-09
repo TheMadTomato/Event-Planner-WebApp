@@ -35,9 +35,50 @@ The project will be divided into four major sections:
 4. **Mail Servers and Database:** Managing notifications, logs, and data storage.
 
 ---
+
 ## How to Currently Run This Project
 
-copy paste the path of the index.html into the browser
+1. Run the WAMP server 
+2. Copy the Files inside Event-Planner-WebApp\src into an new dir in the www dir in WAMP C:\wamp64\www\Event-Planner-WebApp
+3. access the site by inserting "http://localhost/Event-Planner-WebApp/"
+
+---
+
+## Current Features 
+
+- Basic Front-End 
+- Functional Login and Signup Pages
+- Functional Redirection between Login, Signup, and Forgot your Password Pages 
+- Successful implementation of Logout from sessions 
+- Distinction between Admin and End-User session 
+- DB tables Initialized 
+
+## To Be Added 
+
+- Adjust Front-End style especially in Admin-Panel 
+- Implement a Calendar showing Events in the End-User Homepage 
+- Implements Weather API with the Calendar 
+- Implement Authenticaor / 2FA 
+- Figure out a better solution to store admin user and its related security
+- Impelments the mail functionalities
+- Implements the Contact functionalities 
+- Separate the pages in the homepages 
+- Implements Analytis in Admin-Panel
+- Google meet integration 
+- Multilingual Support
+
+---
+
+## Important Notes
+
+1. As you may know Admin user will get access to a different page than end user amidst logging in. Right now The admin is being added into the 
+   DB manually through the SQL tab in phpMyAdmin (Temporary Solution). The Default Credentials are `admin@test:admin`. To change it for now, feel free to edit its SQL 
+   Statement in the `DB_Setup.sql` file before pasting it into phpMyAdmin.
+   
+   PS. To generate the hash of the password use the following PHP syntax 
+   ```php
+		echo password_hash('your-password', PASSWORD_BCRYPT);
+   ```
 
 ---
 
