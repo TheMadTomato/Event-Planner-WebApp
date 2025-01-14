@@ -96,3 +96,24 @@ body {
 .extra-options a:hover {
   text-decoration: underline;
 }
+
+.error-message {
+  color: #ff0000; /* Red color for error text */
+  background-color: #ffe6e6; /* Light red background */
+  border: 1px solid #ff0000; /* Red border */
+  border-radius: 5px; /* Slightly rounded corners */
+  padding: 10px; /* Add some padding */
+  margin-bottom: 15px; /* Add space below the error message */
+  font-size: 14px; /* Slightly smaller font size */
+  text-align: center; /* Center align the text */
+  font-weight: bold; /* Make the text bold */
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px;
+}

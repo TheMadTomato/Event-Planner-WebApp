@@ -46,27 +46,11 @@ The project will be divided into four major sections:
 
 ## Current Features 
 
-- Basic Front-End 
-- Functional Login and Signup Pages
-- Functional Redirection between Login, Signup, and Forgot your Password Pages 
-- Successful implementation of Logout from sessions 
-- Distinction between Admin and End-User session 
-- DB tables Initialized 
+> Updating....
 
 ## To Work On
 
-- Adjust Front-End style especially in Admin-Panel 
-- Replace Mail inout to username input for login
-- Implement a Calendar showing Events in the End-User Homepage 
-- Implements Weather API with the Calendar 
-- Implement Authenticaor / 2FA 
-- Figure out a better solution to store admin user and its related security
-- Impelments the mail functionalities
-- Implements the Contact functionalities 
-- Separate the pages in the homepages 
-- Implements Analytis in Admin-Panel
-- Google meet integration 
-- Multilingual Support
+> Updating....
 
 ---
 

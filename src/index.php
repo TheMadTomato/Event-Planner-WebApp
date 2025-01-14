@@ -1,91 +1,95 @@
 <?php
-// Start session
-session_start();
+require_once __DIR__ . '/php/config.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// If the user is not logged in, redirect to the login page
+// If user is not logged in, redirect to login.php
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+// Get the logged-in user's name
+$userName = isset($_SESSION['user_name']) ? htmlspecialchars($_SESSION['user_name']) : 'Guest';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Planner WebApp</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planner</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #007bff;
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .down-arrow {
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Fade-out effect */
+        .fade-out {
+            animation: fadeOut 1s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="assets/logo.png" alt="Event Planner Logo">
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#events">Events</a></li>
-        <li><a href="#feedback">Feedback</a></li>
-        <li><a href="#contact">Contact</a></li>
-		<li><a href="php/logout.php">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
+    <h1>Welcome, <?php echo $userName; ?></h1>
+    <p>Explore Us</p>
+    <div class="down-arrow" onclick="navigateToMainPage()">&darr;</div>
 
-  <main id="home">
-    <section class="hero">
-      <h1>Welcome to Event Planner</h1>
-      <p>Organize, Manage, and Stay Updated on Club Events.</p>
-      <a href="#signup" class="btn-primary">Get Started</a>
-    </section>
-  </main>
+    <script>
+        function navigateToMainPage() {
+            // Add fade-out effect
+            document.body.classList.add('fade-out');
 
-  <section id="about" class="section">
-    <h2>About Us</h2>
-    <p>We help clubs and organizations plan and manage their events with ease, bringing your community together seamlessly.</p>
-  </section>
-
-  <section id="events" class="section">
-    <h2>Upcoming Events</h2>
-    <div class="events-container">
-      <div class="event-card">
-        <h3>Event Title 1</h3>
-        <p>Date: Jan 20, 2025</p>
-        <p>Location: Campus Hall</p>
-        <button class="btn-secondary">Register</button>
-      </div>
-      <div class="event-card">
-        <h3>Event Title 2</h3>
-        <p>Date: Jan 30, 2025</p>
-        <p>Location: Conference Room</p>
-        <button class="btn-secondary">Register</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="feedback" class="section">
-    <h2>Feedback</h2>
-    <form>
-      <textarea placeholder="Write your feedback here..." required></textarea>
-      <button type="submit" class="btn-primary">Submit Feedback</button>
-    </form>
-  </section>
-
-  <section id="contact" class="section">
-    <h2>Contact Us</h2>
-    <div class="contact-options">
-      <a href="mailto:info@eventplanner.com">Email</a>
-      <a href="#!">WhatsApp</a>
-      <a href="#!">Instagram</a>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Event Planner WebApp. All Rights Reserved.</p>
-  </footer>
-  <script src="js/script.js"></script>
+            // Wait for the fade-out animation to complete, then navigate
+            setTimeout(() => {
+                window.location.href = "main.php";
+            }, 1000); // Match the animation duration (1s)
+        }
+    </script>
 </body>
 </html>

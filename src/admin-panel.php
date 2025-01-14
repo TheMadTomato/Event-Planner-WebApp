@@ -1,90 +1,99 @@
 <?php
 session_start();
-if ($_SESSION['user_role'] !== 'admin') {
-    echo "Access denied. You do not have permission to access this page.";
+require __DIR__ . '/php/config.php'; // Include the config file
+
+// Check if user is logged in and is an admin
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+    header("Location: " . BASE_URL . "login.php");
     exit();
 }
 
-// Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
 
-// Check if user is an admin
-if ($_SESSION['user_role'] !== 'admin') {
-    header("Location: index.php"); // Redirect non-admins to homepage
-    exit();
-}
+
+// Determine the page to load
+$page = $_GET['page'] ?? 'dashboard';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel - Event Planner</title>
-  <link rel="stylesheet" href="css/admin-panel.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/styles.css">
+    <style>
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #007bff;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main content styling */
+        .main-content {
+            margin-left: 270px; /* Leave space for the sidebar */
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div class="admin-container">
-    <aside class="sidebar">
-      <h2>Admin Panel</h2>
-      <ul>
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#manage-events">Manage Events</a></li>
-        <li><a href="#manage-emails">Manage Emails</a></li>
-        <li><a href="#analytics">View Analytics</a></li>
-        <li><a href="php/logout.php">Logout</a></li>
-      </ul>
-    </aside>
+    <!-- Sidebar -->
+    <div class="sidebar" style="background-color: #007bff; color: white; height: 100vh; padding: 15px;">
+        <h2 style="font-family: Arial, sans-serif; font-size: 24px;">Admin Panel</h2>
+        <ul style="list-style-type: none; padding: 0; font-family: Arial, sans-serif; font-size: 18px;">
+            <li><a href="?page=dashboard">Dashboard</a></li>
+            <li><a href="?page=manage-events">Manage Events</a></li>
+            <li><a href="?page=manage-emails">Manage Emails</a></li>
+			<li><a href="php/logout.php">Logout</a></li>
+    </ul>
+        </ul>
+    </div>
 
-    <main class="content">
-      <section id="dashboard">
-        <h1>Welcome, Admin</h1>
-        <p>Use the panel to manage events, emails, and view analytics.</p>
-      </section>
-
-      <section id="manage-events">
-        <h2>Manage Events</h2>
-        <form>
-          <div class="input-group">
-            <label for="event-title">Event Title</label>
-            <input type="text" id="event-title" placeholder="Enter event title" required>
-          </div>
-          <div class="input-group">
-            <label for="event-date">Event Date</label>
-            <input type="date" id="event-date" required>
-          </div>
-          <div class="input-group">
-            <label for="event-location">Event Location</label>
-            <input type="text" id="event-location" placeholder="Enter location" required>
-          </div>
-          <button type="submit" class="btn-primary">Add Event</button>
-        </form>
-      </section>
-
-      <section id="manage-emails">
-        <h2>Manage Emails</h2>
-        <form>
-          <div class="input-group">
-            <label for="email-subject">Email Subject</label>
-            <input type="text" id="email-subject" placeholder="Enter subject" required>
-          </div>
-          <div class="input-group">
-            <label for="email-body">Email Body</label>
-            <textarea id="email-body" placeholder="Enter email content" required></textarea>
-          </div>
-          <button type="submit" class="btn-primary">Send Email</button>
-        </form>
-      </section>
-
-      <section id="analytics">
-        <h2>View Analytics</h2>
-        <p>Coming Soon: Analytics dashboard to view user activity and event statistics.</p>
-      </section>
-    </main>
-  </div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <?php
+        // Load the requested page
+        switch ($page) {
+            case 'manage-events':
+                include __DIR__ . '/admin-pages/manage-events.php';
+                break;
+            case 'manage-emails':
+                include __DIR__ . '/admin-pages/manage-emails.php';
+                break;
+            default:
+                include __DIR__ . '/admin-pages/dashboard.php';
+                break;
+        }
+        ?>
+    </div>
 </body>
 </html>
